@@ -7,7 +7,7 @@ class Bot:
 
     def is_active(self) -> bool:
         try:
-            me = self.telegram.get_me()
+            self.telegram.get_me()
             return True
         except Exception as e:
             print(e)

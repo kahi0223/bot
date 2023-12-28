@@ -42,3 +42,11 @@ bot has to be an admin of the group.
 from bot import Bot
 chat_id = Bot().get_first_group_chat_id()
 ```
+
+# linter
+
+## black
+
+```shell
+python -m black .
+```
