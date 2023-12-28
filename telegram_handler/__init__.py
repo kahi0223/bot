@@ -3,8 +3,8 @@ from typing import ClassVar
 from typing import Type
 from typing import TypeVar
 
-from dotenv import load_dotenv
 import requests
+from dotenv import load_dotenv
 
 from .results import GetMeResultModel
 from .results import GetUpdatesResultModel

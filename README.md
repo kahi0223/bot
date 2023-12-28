@@ -47,6 +47,16 @@ chat_id = Bot().get_first_group_chat_id()
 
 ## black
 
+format as PEP8
+
 ```shell
-python -m black .
+black .
+```
+
+## isort
+
+import order
+
+```shell
+isort .
 ```
