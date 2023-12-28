@@ -2,6 +2,7 @@ import os
 from typing import ClassVar
 from typing import Type
 from typing import TypeVar
+from pydantic import BaseModel
 
 import requests
 from dotenv import load_dotenv
