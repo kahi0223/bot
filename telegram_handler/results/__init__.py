@@ -4,8 +4,8 @@ from .send_message import SendMessageResultModel
 from .user import UserModel
 
 __all__ = [
-    'GetMeResultModel',
-    'GetUpdatesResultModel',
-    'SendMessageResultModel',
-    'UserModel',
+    "GetMeResultModel",
+    "GetUpdatesResultModel",
+    "SendMessageResultModel",
+    "UserModel",
 ]
