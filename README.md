@@ -17,6 +17,8 @@ Using Telegram Bot API to create a bot that can send messages to a group.
 1. create a group
 2. add the bot to the group
 3. make the bot an admin of the group
+4. get chat id of the group as described in the next section
+5. paste the chat id into the `.env` file with parameter `TELEGRAM_GROUP_CHAT_ID=`
 
 # method
 
