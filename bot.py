@@ -1,9 +1,9 @@
-from telegram_handler import TelegramHandler
+from telegram import Telegram
 
 
 class Bot:
     def __init__(self) -> None:
-        self.telegram = TelegramHandler()
+        self.telegram = Telegram()
 
     def group_chat_id(self) -> int | None:
         return self.telegram.group_chat_id

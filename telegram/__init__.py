@@ -15,7 +15,7 @@ load_dotenv()
 T = TypeVar("T", bound="BaseModel")
 
 
-class TelegramHandler:
+class Telegram:
     __TOKEN: ClassVar[str] = os.getenv("TELEGRAM_TOKEN")
     __GROUP_CHAT_ID: ClassVar[int] = int(os.getenv("TELEGRAM_GROUP_CHAT_ID"))
 
