@@ -1,2 +1,4 @@
 .env
 __pycache__/
+hacker_news/cache/
+.DS_Store

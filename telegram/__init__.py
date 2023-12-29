@@ -2,7 +2,6 @@ import os
 from typing import ClassVar
 from typing import Type
 from typing import TypeVar
-from pydantic import BaseModel
 
 import requests
 from dotenv import load_dotenv
@@ -16,8 +15,13 @@ load_dotenv()
 T = TypeVar("T", bound="BaseModel")
 
 
-class TelegramHandler:
-    TOKEN: ClassVar[str] = os.getenv("TELEGRAM_TOKEN")
+class Telegram:
+    __TOKEN: ClassVar[str] = os.getenv("TELEGRAM_TOKEN")
+    __GROUP_CHAT_ID: ClassVar[int] = int(os.getenv("TELEGRAM_GROUP_CHAT_ID"))
+
+    @property
+    def group_chat_id(self) -> int | None:
+        return self.__GROUP_CHAT_ID
 
     @staticmethod
     def parse_response(response: requests.Response, to_model: Type[T]) -> T:
@@ -28,20 +32,20 @@ class TelegramHandler:
 
     def get_me(self) -> GetMeResultModel:
         request = requests.get(
-            f"https://api.telegram.org/bot{self.TOKEN}/getMe",
+            f"https://api.telegram.org/bot{self.__TOKEN}/getMe",
         )
         return self.parse_response(response=request, to_model=GetMeResultModel)
 
     def get_updates(self) -> GetUpdatesResultModel:
         # If result is empty array, add bot to group of an admin.
         request = requests.get(
-            f"https://api.telegram.org/bot{self.TOKEN}/getUpdates",
+            f"https://api.telegram.org/bot{self.__TOKEN}/getUpdates",
         )
         return self.parse_response(response=request, to_model=GetUpdatesResultModel)
 
     def send_message(self, chat_id: int, text: str) -> SendMessageResultModel:
         request = requests.post(
-            f"https://api.telegram.org/bot{self.TOKEN}/sendMessage",
+            f"https://api.telegram.org/bot{self.__TOKEN}/sendMessage",
             json={
                 "chat_id": chat_id,
                 "text": text,
