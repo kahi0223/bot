@@ -80,16 +80,18 @@ class HackerNews:
         tags: HackerNewsTag | list[HackerNewsTag] = None,
         numeric_filters: list[HackerNewsNumericFilter] = None,
         bypass_cache: bool = False,
+        cache_expire_sec: int = None,
     ) -> HitModel:
         """Search by date
         :param tags: story, comment, poll, pollopt, show_hn, ask_hn, front_page
         :param numeric_filters: created_at_i, points, num_comments, objectID
         :param bypass_cache: if True, fetch from API without cache
+        :param cache_expire_sec: if bypass_cache is False, cache expire time
         """
         result = None
 
         if not bypass_cache:
-            result = self.cache.load_latest_json(expire_sec=10 * 60)
+            result = self.cache.load_latest_json(expire_sec=cache_expire_sec)
 
         if result is None:
             print("Fetching from API.")

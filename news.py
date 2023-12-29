@@ -13,8 +13,9 @@ from hacker_news import HitModel
 class News:
     hacker_news = HackerNews()
 
-    POINTS_THRESHOLD: int = 500
-    CREATED_AT_THRESHOLD_SEC: int = 12 * 60 * 60  # 1 day
+    cache_expire_sec: int = 60 * 60  # 1 hour
+    points_threshold: int = 500
+    created_at_threshold_sec: int = 12 * 60 * 60  # 12 hours
 
     @staticmethod
     def current_timestamp_sec() -> int:
@@ -27,13 +28,14 @@ class News:
                 HackerNewsNumericFilter(
                     key=HackerNewsNumericFiltersKey.POINTS,
                     condition=">=",
-                    value=self.POINTS_THRESHOLD,
+                    value=self.points_threshold,
                 ),
                 HackerNewsNumericFilter(
                     key=HackerNewsNumericFiltersKey.CREATED_AT_I,
                     condition=">=",
-                    value=self.current_timestamp_sec() - self.CREATED_AT_THRESHOLD_SEC,
+                    value=self.current_timestamp_sec() - self.created_at_threshold_sec,
                 ),
             ],
             bypass_cache=bypass_cache,
+            cache_expire_sec=self.cache_expire_sec,
         )
