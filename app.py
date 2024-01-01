@@ -16,20 +16,29 @@ app = Flask(__name__)
 @app.route("/", methods=["POST"])
 def message(bot: Bot) -> tuple[dict[str, str], int]:
     """Bot endpoint.
-    payload: {"message": "<text>"}
+    body: {"message": "<text>"}
     """
-    message = request.form.get("message", None)
-    if message is None:
+    message_ = request.form.get("message", None)
+    if message_ is None:
         return {"message": "No message"}, 400
-    result: Result = send_message(bot=bot, message=message)
+    result: Result = send_message(bot=bot, message=message_)
     if result.status == ResultStatus.OK:
         return result.payload, 200
     return result.payload, 500
 
 
-@app.route("/news", methods=["POST"])
+@app.route("/news", methods=["GET"])
 def hot_news(bot: Bot, news: News) -> tuple[dict[str, str], int]:
-    result: Result = send_hot_news(bot=bot, news=news)
+    """Hot news endpoint."""
+    points_threshold = request.args.get("points", None, type=int)
+    created_at_threshold_sec = request.args.get("created_at", None, type=int)
+
+    result: Result = send_hot_news(
+        bot=bot,
+        news=news,
+        points_threshold=points_threshold,
+        created_at_threshold_sec=created_at_threshold_sec,
+    )
     if result.status == ResultStatus.OK:
         return result.payload, 200
     return result.payload, 500

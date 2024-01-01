@@ -7,13 +7,14 @@ from pydantic import model_validator
 
 class HitEntityModel(BaseModel):
     title: str
-    url: str
     created_at: datetime
     created_at_i: int
     objectID: int
     points: int
     story_id: int
     updated_at: datetime
+    # sometimes url is None
+    url: str | None = None
 
     # noinspection PyNestedDecorators
     @model_validator(mode="before")

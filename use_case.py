@@ -16,8 +16,17 @@ def send_message(bot: Bot, message: str) -> Result:
     return Result(status=ResultStatus.OK, payload={"message": message})
 
 
-def send_hot_news(bot: Bot, news: News) -> Result:
-    hot_news_ = news.hot_news(bypass_cache=True)
+def send_hot_news(
+    bot: Bot,
+    news: News,
+    points_threshold: int | None = None,
+    created_at_threshold_sec: int | None = None,
+) -> Result:
+    hot_news_ = news.hot_news(
+        points_threshold=points_threshold,
+        created_at_threshold_sec=created_at_threshold_sec,
+        bypass_cache=True,
+    )
     if not hot_news_.has_result():
         print("No result.")
         return Result(status=ResultStatus.OK, payload={"message": "No result"})
