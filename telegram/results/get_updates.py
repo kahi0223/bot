@@ -17,8 +17,8 @@ class GetUpdateResultEntityMyChatMemberChatModel(BaseModel):
     @model_validator(mode="before")
     @classmethod
     def id_(cls, data: dict[str, Any]) -> dict[str, Any]:
-        data['id_'] = data['id']
-        del data['id']
+        data["id_"] = data["id"]
+        del data["id"]
         return data
 
 
@@ -31,18 +31,18 @@ class GetUpdateResultEntityMyChatMemberModel(BaseModel):
     @classmethod
     def pop(cls, data: dict[str, Any]) -> dict[str, Any]:
         # remove unused fields
-        data.pop('old_chat_member')
-        data.pop('new_chat_member')
+        data.pop("old_chat_member")
+        data.pop("new_chat_member")
         # data.pop('from')
-        data.pop('date')
+        data.pop("date")
         return data
 
     # noinspection PyNestedDecorators
     @model_validator(mode="before")
     @classmethod
     def from_(cls, data: dict[str, Any]) -> dict[str, Any]:
-        data['from_'] = data['from']
-        del data['from']
+        data["from_"] = data["from"]
+        del data["from"]
         return data
 
 

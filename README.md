@@ -17,8 +17,10 @@ Using Telegram Bot API to create a bot that can send messages to a group.
 1. create a group
 2. add the bot to the group
 3. make the bot an admin of the group
+4. get chat id of the group as described in the next section
+5. paste the chat id into the `.env` file with parameter `TELEGRAM_GROUP_CHAT_ID=`
 
-# method
+# Bot method
 
 ## get bot status
 
@@ -42,3 +44,64 @@ bot has to be an admin of the group.
 from bot import Bot
 chat_id = Bot().get_first_group_chat_id()
 ```
+
+# News method
+
+## hot stories
+
+```python
+from news import News
+News().hot_news()
+```
+
+as default, cache will be used to avoid too many requests to the server.
+
+if bypass cache, set `bypass_cache=True`
+
+```python
+from news import News
+News().hot_news(bypass_cache=False)
+```
+
+# Run
+
+Fetch hot news and send to a chat group.
+
+## Run by command
+
+```shell
+poetry run python main.py
+```
+
+## Run App
+
+production
+
+```shell
+gunicorn app:app
+```
+
+development
+
+```shell
+python -m flask run --debug
+```
+
+# linter
+
+## black
+
+format as PEP8
+
+```shell
+black .
+```
+
+## isort
+
+import order
+
+```shell
+isort .
+```
+
