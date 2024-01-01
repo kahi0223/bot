@@ -69,10 +69,6 @@ Fetch hot news and send to a chat group.
 
 ## Run by command
 
-```shell
-poetry run python main.py
-```
-
 ## Run App
 
 production
@@ -86,6 +82,11 @@ development
 ```shell
 python -m flask run --debug
 ```
+
+### Endpoints
+
+- GET `/news` - hot news from hacker news
+- POST `/bot` - send hot news to a chat group
 
 # linter
 

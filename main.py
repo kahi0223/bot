@@ -4,7 +4,21 @@ from models.result import ResultStatus
 from news import News
 
 
-def main():
+def send_message(message: str):
+    bot = Bot()
+
+    group_chat_id = bot.group_chat_id()
+    if group_chat_id is None:
+        print("No group chat id.")
+        return Result(
+            status=ResultStatus.ERROR, payload={"message": "No group chat id"}
+        )
+
+    bot.send_message(chat_id=group_chat_id, text=message)
+    return Result(status=ResultStatus.OK, payload={"message": message})
+
+
+def hot_news():
     news = News()
     hot_news = news.hot_news(bypass_cache=True)
     if not hot_news.has_result():
@@ -29,4 +43,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    hot_news()
+    send_message("Hello World!")
