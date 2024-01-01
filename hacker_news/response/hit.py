@@ -57,3 +57,6 @@ class HitModel(BaseModel):
 
     def has_result(self) -> bool:
         return len(self.hits) > 0
+
+    def to_dict(self) -> dict[str, Any]:
+        return self.model_dump()
