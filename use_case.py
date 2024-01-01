@@ -3,10 +3,10 @@ from models import Result
 from models.result import ResultStatus
 from news import News
 
+bot = Bot()
+
 
 def send_message(message: str):
-    bot = Bot()
-
     group_chat_id = bot.group_chat_id()
     if group_chat_id is None:
         print("No group chat id.")
@@ -20,12 +20,11 @@ def send_message(message: str):
 
 def hot_news():
     news = News()
-    hot_news = news.hot_news(bypass_cache=True)
-    if not hot_news.has_result():
+    hot_news_ = news.hot_news(bypass_cache=True)
+    if not hot_news_.has_result():
         print("No result.")
         return Result(status=ResultStatus.OK, payload={"message": "No result"})
 
-    bot = Bot()
     group_chat_id = bot.group_chat_id()
     if group_chat_id is None:
         print("No group chat id.")
@@ -33,15 +32,10 @@ def hot_news():
             status=ResultStatus.ERROR, payload={"message": "No group chat id"}
         )
 
-    if len(hot_news.hits) == 0:
+    if len(hot_news_.hits) == 0:
         print("No hits.")
         return Result(status=ResultStatus.OK, payload={"message": "No hits"})
 
-    for hit in hot_news.hits:
+    for hit in hot_news_.hits:
         bot.send_message(chat_id=group_chat_id, text=hit.to_text())
-    return Result(status=ResultStatus.OK, payload={"message": hot_news.to_dict()})
-
-
-if __name__ == "__main__":
-    hot_news()
-    send_message("Hello World!")
+    return Result(status=ResultStatus.OK, payload={"message": hot_news_.to_dict()})

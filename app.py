@@ -1,8 +1,8 @@
 from flask import Flask
 from flask import request
 
-from main import send_message
-from main import hot_news
+from use_case import send_message
+from use_case import hot_news
 from models import Result
 from models.result import ResultStatus
 
