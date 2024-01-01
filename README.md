@@ -85,7 +85,7 @@ python -m flask run --debug
 
 ### Endpoints
 
-- GET `/news` - hot news from hacker news
+- POST `/news` - hot news from hacker news
 - POST `/bot` - send hot news to a chat group
 
 # linter

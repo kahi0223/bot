@@ -3,10 +3,8 @@ from models import Result
 from models.result import ResultStatus
 from news import News
 
-bot = Bot()
 
-
-def send_message(message: str):
+def send_message(bot: Bot, message: str) -> Result:
     group_chat_id = bot.group_chat_id()
     if group_chat_id is None:
         print("No group chat id.")
@@ -18,8 +16,7 @@ def send_message(message: str):
     return Result(status=ResultStatus.OK, payload={"message": message})
 
 
-def hot_news():
-    news = News()
+def send_hot_news(bot: Bot, news: News) -> Result:
     hot_news_ = news.hot_news(bypass_cache=True)
     if not hot_news_.has_result():
         print("No result.")
