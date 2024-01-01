@@ -14,7 +14,7 @@ class News:
     hacker_news = HackerNews()
 
     cache_expire_sec: int = 60 * 60  # 1 hour
-    default_points_threshold: int = 100
+    default_points_threshold: int = 200
     default_created_at_threshold_sec: int = 12 * 60 * 60  # 12 hours
 
     @staticmethod
