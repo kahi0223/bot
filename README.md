@@ -75,6 +75,14 @@ poetry run python main.py
 
 ## Run App
 
+production
+
+```shell
+gunicorn app:app
+```
+
+development
+
 ```shell
 python -m flask run --debug
 ```
