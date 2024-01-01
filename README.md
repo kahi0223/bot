@@ -45,6 +45,48 @@ from bot import Bot
 chat_id = Bot().get_first_group_chat_id()
 ```
 
+# News method
+
+## hot stories
+
+```python
+from news import News
+News().hot_news()
+```
+
+as default, cache will be used to avoid too many requests to the server.
+
+if bypass cache, set `bypass_cache=True`
+
+```python
+from news import News
+News().hot_news(bypass_cache=False)
+```
+
+# Run
+
+Fetch hot news and send to a chat group.
+
+## Run by command
+
+```shell
+poetry run python main.py
+```
+
+## Run App
+
+production
+
+```shell
+gunicorn app:app
+```
+
+development
+
+```shell
+python -m flask run --debug
+```
+
 # linter
 
 ## black
@@ -63,20 +105,3 @@ import order
 isort .
 ```
 
-# News method
-
-## hot stories
-
-```python
-from news import News
-News().hot_news()
-```
-
-as default, cache will be used to avoid too many requests to the server.
-
-if bypass cache, set `bypass_cache=True`
-
-```python
-from news import News
-News().hot_news(bypass_cache=False)
-```
