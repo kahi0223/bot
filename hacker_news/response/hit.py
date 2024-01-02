@@ -30,8 +30,9 @@ class HitEntityModel(BaseModel):
     def to_text(self) -> str:
         return (
             f"title: {self.title} \n"
-            f"url: {self.url} \n"
+            f"url: {self.url or ''} \n"
             f"created_at: {self.created_at.strftime('%Y/%m/%d %H:%M(UTC)')} \n"
+            f"points: {self.points} \n"
         )
 
 
